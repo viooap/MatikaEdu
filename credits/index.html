@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credits & Tim - RuangMatematika</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-full text-slate-800 font-sans antialiased bg-slate-100/80 flex flex-col min-h-screen">
+
+  <!-- TOP NAVBAR LIGHT MODE -->
+  <header class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo & Back Link -->
+      <div class="flex items-center gap-4">
+        <a href="/" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors" title="Kembali ke Dashboard">
+          <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        </a>
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center text-white font-bold shadow-md shadow-violet-500/20">
+            <span class="text-xl">Σ</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-extrabold text-lg text-slate-900 tracking-tight leading-none">Ruang<span class="text-violet-600">Matematika</span></span>
+            <span class="text-[10px] text-slate-400 font-bold tracking-widest uppercase mt-0.5">Credits & Kontributor</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Hamburger Button garis tiga -->
+      <button id="openMenuBtn" aria-label="Buka Menu" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors focus:outline-none">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR / DRAWER MENU UTAMA -->
+  <div id="drawerOverlay" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  
+  <aside id="drawerMenu" class="fixed top-0 right-0 sm:right-auto sm:left-0 z-50 w-80 max-w-[85vw] h-full bg-white border-l sm:border-l-0 sm:border-r border-slate-200 transform translate-x-full sm:-translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl">
+    <div>
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white font-bold">
+            Σ
+          </div>
+          <span class="font-bold text-slate-900">Menu Navigasi</span>
+        </div>
+        <button id="closeMenuBtn" aria-label="Tutup Menu" class="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <nav class="p-4 space-y-2">
+        <a href="/" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all font-medium group">
+          <div class="p-2 rounded-lg bg-slate-100 text-slate-500 group-hover:bg-violet-100 group-hover:text-violet-600 transition-colors">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold">1. Dashboard</span>
+            <span class="text-[11px] text-slate-400 font-normal">Halaman Utama</span>
+          </div>
+        </a>
+
+        <a href="/materi/" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all font-medium group">
+          <div class="p-2 rounded-lg bg-slate-100 text-slate-500 group-hover:bg-violet-100 group-hover:text-violet-600 transition-colors">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold">2. Pilih Materi</span>
+            <span class="text-[11px] text-slate-400 font-normal">Modul Finansial</span>
+          </div>
+        </a>
+
+        <a href="/credits/" class="flex items-center gap-3 px-4 py-3 rounded-xl text-amber-700 bg-amber-50 border border-amber-200 font-medium group">
+          <div class="p-2 rounded-lg bg-amber-500 text-white shadow-sm">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-sm font-bold text-amber-900">3. Credits</span>
+            <span class="text-[11px] text-amber-600 font-normal">Tim & Pembuat</span>
+          </div>
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-slate-100 bg-slate-50">
+      <div class="flex items-center gap-3 text-xs text-slate-500">
+        <i data-lucide="info" class="w-4 h-4 text-violet-600 flex-shrink-0"></i>
+        <span>Halaman Informasi Tim</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- KONTEN UTAMA CREDITS -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- HEADER CREDITS -->
+    <div class="mb-8 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm text-center sm:text-left">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold mb-3">
+        <i data-lucide="award" class="w-3.5 h-3.5"></i>
+        Tim Pengembang
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+        Credits & Penghargaan
+      </h1>
+      <p class="mt-2 text-slate-600 text-sm sm:text-base leading-relaxed">
+        Aplikasi interaktif media pembelajaran matematika keuangan ini dibangun dengan dedikasi untuk memudahkan pemahaman Bunga Tunggal, Bunga Majemuk, dan Anuitas.
+      </p>
+    </div>
+
+    <!-- TIM PENGEMBANG (2 ORANG) -->
+    <section class="mb-8 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-lg bg-violet-100 text-violet-600 flex items-center justify-center text-sm font-extrabold">👥</span>
+        Tim Pembuat
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        
+        <!-- ANGGOTA 1 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col items-center text-center group hover:bg-white hover:border-violet-300 hover:shadow-lg transition-all">
+          
+          <!-- Foto Anggota 1 -->
+          <div class="relative mb-4">
+            <img 
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80" 
+              alt="Foto Anggota 1" 
+              class="w-24 h-24 rounded-full object-cover ring-4 ring-white shadow-md group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute bottom-0 right-0 p-1.5 rounded-full bg-violet-600 text-white shadow-sm">
+              <i data-lucide="code" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+          <!-- Informasi Anggota 1 -->
+          <h3 class="font-extrabold text-slate-900 text-lg">Nama Anggota 1</h3>
+          <span class="text-xs font-semibold text-violet-600 bg-violet-50 border border-violet-200 px-3 py-0.5 rounded-full mt-1">
+            Frontend & Developer
+          </span>
+          
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed">
+            Bertanggung jawab atas pengembangan antarmuka (UI/UX), logika navigasi interaktif, dan penataan tampilan materi.
+          </p>
+
+          <!-- Social Links -->
+          <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-200/60 w-full justify-center">
+            <a href="#" class="p-2 rounded-lg bg-white border border-slate-200 text-slate-500 hover:text-violet-600 hover:border-violet-300 transition-colors" title="GitHub">
+              <i data-lucide="github" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="p-2 rounded-lg bg-white border border-slate-200 text-slate-500 hover:text-violet-600 hover:border-violet-300 transition-colors" title="LinkedIn">
+              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="p-2 rounded-lg bg-white border border-slate-200 text-slate-500 hover:text-violet-600 hover:border-violet-300 transition-colors" title="Instagram">
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- ANGGOTA 2 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col items-center text-center group hover:bg-white hover:border-violet-300 hover:shadow-lg transition-all">
+          
+          <!-- Foto Anggota 2 -->
+          <div class="relative mb-4">
+            <img 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80" 
+              alt="Foto Anggota 2" 
+              class="w-24 h-24 rounded-full object-cover ring-4 ring-white shadow-md group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute bottom-0 right-0 p-1.5 rounded-full bg-indigo-600 text-white shadow-sm">
+              <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+          <!-- Informasi Anggota 2 -->
+          <h3 class="font-extrabold text-slate-900 text-lg">Nama Anggota 2</h3>
+          <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-0.5 rounded-full mt-1">
+            Penyusun Materi & UI
+          </span>
+
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed">
+            Bertanggung jawab atas penyusunan konten matematis, analisis finansial anuitas, dan pengujian kualitas materi.
+          </p>
+
+          <!-- Social Links -->
+          <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-200/60 w-full justify-center">
+            <a href="#" class="p-2 rounded-lg bg-white border border-slate-200 text-slate-500 hover:text-violet-600 hover:border-violet-300 transition-colors" title="GitHub">
+              <i data-lucide="github" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="p-2 rounded-lg bg-white border border-slate-200 text-slate-500 hover:text-violet-600 hover:border-violet-300 transition-colors" title="LinkedIn">
+              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="p-2 rounded-lg bg-white border border-slate-200 text-slate-500 hover:text-violet-600 hover:border-violet-300 transition-colors" title="Instagram">
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TEKNOLOGI YANG DIGUNAKAN -->
+    <section class="mb-8 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-lg bg-violet-100 text-violet-600 flex items-center justify-center text-sm font-extrabold">🚀</span>
+        Teknologi & Framework
+      </h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+          <span class="font-bold text-slate-900 text-sm mb-1">Tailwind CSS</span>
+          <span class="text-slate-500">Styling & Layout</span>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+          <span class="font-bold text-slate-900 text-sm mb-1">Lucide Icons</span>
+          <span class="text-slate-500">Ikonografi SVG</span>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+          <span class="font-bold text-slate-900 text-sm mb-1">Google Fonts</span>
+          <span class="text-slate-500">Plus Jakarta Sans</span>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+          <span class="font-bold text-slate-900 text-sm mb-1">HTML5 & JS</span>
+          <span class="text-slate-500">Struktur & Interaksi</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UCAPAN TERIMA KASIH -->
+    <section class="bg-gradient-to-br from-violet-600 to-indigo-600 rounded-2xl p-6 sm:p-8 shadow-md text-white text-center">
+      <div class="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center mx-auto mb-4 text-amber-300">
+        <i data-lucide="heart" class="w-6 h-6 fill-current"></i>
+      </div>
+      <h2 class="text-lg sm:text-xl font-bold mb-2">
+        Terima Kasih Atas Dukungan Anda
+      </h2>
+      <p class="text-xs sm:text-sm text-violet-100 leading-relaxed max-w-xl mx-auto">
+        Semoga platform edukasi ini memberikan manfaat bagi siswa, guru, dan siapa saja yang ingin mempelajari matematika keuangan secara mudah dan praktis.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+    <p>&copy; 2026 RuangMatematika. Hak Cipta Dilindungi.</p>
+  </footer>
+
+  <!-- SCRIPT LOGIKA DRAWER NAVIGATION -->
+  <script>
+    lucide.createIcons();
+
+    const openMenuBtn = document.getElementById('openMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const drawerMenu = document.getElementById('drawerMenu');
+
+    function openDrawer() {
+      drawerOverlay.classList.remove('opacity-0', 'pointer-events-none');
+      drawerMenu.classList.remove('translate-x-full', 'sm:-translate-x-full');
+    }
+
+    function closeDrawer() {
+      drawerOverlay.classList.add('opacity-0', 'pointer-events-none');
+      drawerMenu.classList.add('translate-x-full', 'sm:-translate-x-full');
+    }
+
+    openMenuBtn.addEventListener('click', openDrawer);
+    closeMenuBtn.addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+  </script>
+</body>
+</html>

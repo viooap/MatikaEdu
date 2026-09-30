@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MatikaEdu - Dashboard Pembelajaran Matematika</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- TOP NAVBAR -->
+    <header class="sticky top-0 z-30 bg-white/85 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-xs">
+        <!-- Logo Brand -->
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-indigo-500/25">
+                <span>∑</span>
+            </div>
+            <div>
+                <div class="flex items-center space-x-1.5">
+                    <span class="text-xl font-black bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent tracking-tight">RuangMatematika</span>
+                </div>
+                <span class="text-[10px] text-slate-400 font-semibold tracking-wider uppercase block -mt-1">Dashboard Hub</span>
+            </div>
+        </div>
+
+        <!-- Right Side: Auth Buttons, Date Badge & Hamburger Menu Button -->
+        <div class="flex items-center space-x-3">
+            <span class="hidden md:inline-flex items-center text-xs font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 px-3 py-1.5 rounded-full">
+                <i class="fa-regular fa-calendar mr-1.5"></i> Dashboard Pembelajaran
+            </span>
+
+            <!-- TOMBOL MASUK & DAFTAR (DESKTOP NAVBAR) -->
+            <div class="hidden sm:flex items-center space-x-2">
+                <a href="login.html" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 border border-slate-200 transition-all flex items-center space-x-1.5">
+                    <i class="fa-solid fa-right-to-bracket text-indigo-600"></i>
+                    <span>Masuk</span>
+                </a>
+                <a href="register.html" class="px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-all flex items-center space-x-1.5 shadow-md shadow-indigo-500/20">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Daftar</span>
+                </a>
+            </div>
+
+            <!-- Hamburger Button (Garis Tiga ☰) -->
+            <button id="hamburger-btn" onclick="toggleMenu()" aria-label="Buka Menu" class="w-11 h-11 rounded-2xl bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-600 border border-slate-200/80 flex items-center justify-center transition-all duration-200 active:scale-95 focus:outline-none cursor-pointer">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- OVERLAY BACKDROP -->
+    <div id="menu-backdrop" onclick="toggleMenu()" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+    <!-- SIDEBAR / DRAWER MENU -->
+    <aside id="side-drawer" class="fixed top-0 right-0 h-full w-72 sm:w-80 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between p-6">
+        <div class="space-y-6">
+            <!-- Drawer Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-base">
+                        <span>∑</span>
+                    </div>
+                    <span class="font-extrabold text-slate-800 text-base">Menu Utama</span>
+                </div>
+                <!-- Close Button (X) -->
+                <button onclick="toggleMenu()" aria-label="Tutup Menu" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-600 flex items-center justify-center transition-colors cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Menu Links -->
+            <nav class="space-y-2">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 block">Navigasi Halaman</span>
+                
+                <!-- Dashboard (Active) -->
+                <a href="#" onclick="toggleMenu()" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl bg-indigo-600 text-white font-bold text-xs shadow-md shadow-indigo-500/20 transition-all">
+                    <i class="fa-solid fa-chart-pie text-base w-5"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <!-- Pilih Materi -->
+                <a href="/materi/" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/70 font-bold text-xs transition-all group">
+                    <i class="fa-solid fa-book-open text-base w-5 group-hover:scale-110 transition-transform"></i>
+                    <span class="flex-grow">Pilih Materi</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-60"></i>
+                </a>
+
+                <!-- Credits -->
+                <a href="/credits/" class="flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/70 font-bold text-xs transition-all group">
+                    <i class="fa-solid fa-sparkles text-base w-5 group-hover:scale-110 transition-transform"></i>
+                    <span class="flex-grow">Credits</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-60"></i>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Drawer Footer Area (Masuk & Daftar + Info Card) -->
+        <div class="space-y-3">
+            <!-- TOMBOL MASUK & DAFTAR (SIDEBAR/DRAWER) -->
+            <div class="grid grid-cols-2 gap-2">
+                <a href="login.html" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs text-center border border-slate-200 transition-all flex items-center justify-center space-x-1.5">
+                    <i class="fa-solid fa-right-to-bracket text-indigo-600"></i>
+                    <span>Masuk</span>
+                </a>
+                <a href="register.html" class="w-full py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs text-center transition-all flex items-center justify-center space-x-1.5 shadow-md shadow-indigo-500/20">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Daftar</span>
+                </a>
+            </div>
+
+            <!-- Drawer Info Box -->
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 space-y-2">
+                <div class="flex items-center space-x-2 text-indigo-700 font-extrabold text-xs">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>RuangMatematika</span>
+                </div>
+                <p class="text-[11px] text-slate-500 leading-relaxed">
+                    Eksplorasi ilmu matematika secara terstruktur melalui modul dan platform terpisah.
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6 lg:space-y-8">
+
+        <!-- Welcome Banner / Hero Card -->
+        <div class="glass-card rounded-3xl p-6 md:p-8 border border-slate-200/80 shadow-xs relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
+                <div class="space-y-1.5">
+                    <div class="flex items-center space-x-2 text-xs font-bold text-indigo-600 uppercase tracking-wider">
+                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span>Pusat Wawasan Matematika</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+                        Selamat Datang di <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">RuangMatematika! 👋</span>
+                    </h1>
+                    <p class="text-slate-500 text-xs sm:text-sm max-w-xl leading-relaxed">
+                        "Matematika adalah bahasa universal tempat alam semesta menuliskan rahasianya." — <em>Galileo Galilei</em>
+                    </p>
+                </div>
+                
+                <!-- Quick Stats Badge -->
+                <div class="flex items-center gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100">
+                    <div class="bg-indigo-50/80 p-3 rounded-2xl flex items-center space-x-3 border border-indigo-100">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-atom"></i>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-slate-500 font-semibold uppercase">Modul Siap Akses</div>
+                            <div class="text-xs font-extrabold text-indigo-900">4 Cabang Utama</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Widget: Fakta Unik Matematika Hari Ini -->
+        <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-orange-500/10 border border-amber-200/80 rounded-3xl p-6 md:p-8 relative overflow-hidden shadow-xs">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-amber-500/30">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </span>
+                        <h3 class="text-base md:text-lg font-extrabold text-amber-950">Fakta Unik Matematika</h3>
+                    </div>
+                    <p id="fact-display-text" class="text-slate-700 text-xs sm:text-sm leading-relaxed font-medium pt-1 transition-opacity duration-300">
+                        "Nomor 7 adalah angka keberuntungan paling populer di dunia, dan angka 0 (Nol) ditemukan oleh matematikawan India kuno sebelum disempurnakan di era keemasan Islam."
+                    </p>
+                </div>
+
+                <button onclick="generateRandomFact()" class="self-start md:self-center px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-95 text-white font-bold text-xs shadow-md shadow-amber-500/20 transition-all flex items-center space-x-2 whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-rotate-right text-xs"></i>
+                    <span>Fakta Lainnya</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Apa itu Matematika? Section -->
+        <div class="relative rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 lg:p-10 shadow-xl overflow-hidden border border-indigo-900/40">
+            <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 space-y-4 max-w-3xl">
+                <span class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold backdrop-blur-md">
+                    <i class="fa-solid fa-compass text-xs"></i>
+                    <span>Pengantar Ilmu</span>
+                </span>
+                <h2 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
+                    Apa itu Matematika & Perannya di Dunia Nyata?
+                </h2>
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                    Matematika bukan sekadar hafalan rumus, melainkan <strong class="text-white">ilmu tentang logika, pola, dan struktur</strong>. Matematika menjadi fondasi utama dalam teknologi modern—mulai dari algoritma kecerdasan buatan (AI), enkripsi data keamanan perbankan, analisis statistik kedokteran, hingga rancangan arsitektur gedung pencakar langit.
+                </p>
+            </div>
+        </div>
+
+        <!-- Cabang-cabang Matematika -->
+        <div class="space-y-4">
+            <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md">Peta Keilmuan</span>
+                <h2 class="text-xl font-extrabold text-slate-900 mt-1">Cabang Utama Matematika</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Aljabar -->
+                <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs space-y-3">
+                    <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-800 text-sm">Aljabar</h3>
+                    <p class="text-slate-500 text-xs leading-relaxed">
+                        Struktur manipulasi simbol dan variabel untuk memecahkan persamaan yang belum diketahui.
+                    </p>
+                </div>
+
+                <!-- Geometri -->
+                <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs space-y-3">
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-800 text-sm">Geometri</h3>
+                    <p class="text-slate-500 text-xs leading-relaxed">
+                        Studi tentang bentuk, ukuran, posisi, dan sifat-sifat ruang dari objek 2D dan 3D.
+                    </p>
+                </div>
+
+                <!-- Kalkulus -->
+                <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs space-y-3">
+                    <div class="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-wave-square"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-800 text-sm">Kalkulus</h3>
+                    <p class="text-slate-500 text-xs leading-relaxed">
+                        Analisis tentang perubahan kontinu melalui konsep turunan diferensial dan akumulasi integral.
+                    </p>
+                </div>
+
+                <!-- Statistika -->
+                <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs space-y-3">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-800 text-sm">Statistika & Probabilitas</h3>
+                    <p class="text-slate-500 text-xs leading-relaxed">
+                        Metode pengumpulan, analisis data, serta prediksi peluang terjadinya suatu peristiwa.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tokoh & Sejarah Matematika -->
+        <div class="space-y-4">
+            <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-purple-600 bg-purple-50 px-2.5 py-1 rounded-md">Jejak Peradaban</span>
+                <h2 class="text-xl font-extrabold text-slate-900 mt-1">Tokoh Matematika Dunia</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Al-Khwarizmi -->
+                <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-3">
+                    <div class="w-11 h-11 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-kaaba"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 text-base">Al-Khwarizmi</h3>
+                        <p class="text-[11px] text-purple-600 font-bold">Bapak Aljabar (780–850 M)</p>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed">
+                        Penemu cabang ilmu Aljabar dan pengembang algoritma sistem desimal modern.
+                    </p>
+                </div>
+
+                <!-- Pythagoras -->
+                <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-3">
+                    <div class="w-11 h-11 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-shapes"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 text-base">Pythagoras</h3>
+                        <p class="text-[11px] text-indigo-600 font-bold">Geometris Yunani (570–495 SM)</p>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed">
+                        Terkenal dengan Teorema Pythagoras yang menghubungkan ketiga sisi segitiga siku-siku.
+                    </p>
+                </div>
+
+                <!-- Archimedes -->
+                <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-3">
+                    <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-compass-drafting"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 text-base">Archimedes</h3>
+                        <p class="text-[11px] text-emerald-600 font-bold">Master Geometri (287–212 SM)</p>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed">
+                        Menghitung nilai presisi konstanta Pi ($\pi$) dan penemu prinsip hidrostatika fluida.
+                    </p>
+                </div>
+
+                <!-- Ada Lovelace -->
+                <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-3">
+                    <div class="w-11 h-11 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 text-base">Ada Lovelace</h3>
+                        <p class="text-[11px] text-rose-600 font-bold">Programmer Pertama (1815–1852)</p>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed">
+                        Matematikawan wanita yang memelopori logika pemrograman komputer mekanis pertama.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action Banner (Subfolder Redirect) -->
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg shadow-indigo-500/20">
+            <div class="space-y-2 text-center sm:text-left">
+                <h3 class="text-xl font-extrabold">Siap Memulai Pembelajaran?</h3>
+                <p class="text-indigo-100 text-xs sm:text-sm max-w-md">
+                    Pilih modul materi matematika interaktif lengkap dengan rangkuman rumus dan latihan soal.
+                </p>
+            </div>
+            <a href="/materi" class="px-6 py-3.5 rounded-2xl bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold text-xs shadow-md transition-all active:scale-95 whitespace-nowrap flex items-center space-x-2">
+                <span>Buka Katalog Materi</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="pt-6 pb-4 text-center text-slate-400 text-xs">
+            <p>&copy; 2026 RuangMatematika. All rights reserved.</p>
+        </footer>
+
+    </main>
+
+    <!-- Javascript Logic -->
+    <script>
+        // Toggle Open/Close Drawer Overlay
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            const drawer = document.getElementById('side-drawer');
+            const backdrop = document.getElementById('menu-backdrop');
+            
+            isMenuOpen = !isMenuOpen;
+
+            if (isMenuOpen) {
+                // Open Drawer
+                drawer.classList.remove('translate-x-full');
+                backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                backdrop.classList.add('opacity-100');
+                document.body.style.overflow = 'hidden'; // Lock scroll
+            } else {
+                // Close Drawer
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = ''; // Unlock scroll
+            }
+        }
+
+        // Array Fakta Unik Matematika
+        const mathFacts = [
+            "Nomor 7 adalah angka keberuntungan paling populer di dunia, dan angka 0 ditemukan di India kuno.",
+            "Simbol sama dengan (=) baru diciptakan pada tahun 1557 oleh Robert Recorde karena lelah menulis kata 'sama dengan' berulang kali.",
+            "Sebuah pizza berbentuk lingkaran dengan jari-jari 'z' dan ketebalan 'a' memiliki volume = pi * z * z * a!",
+            "Di antara semua bentuk dengan keliling yang sama, lingkaran memiliki luas bangun yang paling besar.",
+            "Angka 2 dan 5 adalah satu-satunya angka prima yang berakhiran angka 2 atau 5."
+        ];
+
+        // Function untuk mengacak fakta unik
+        function generateRandomFact() {
+            const randomIndex = Math.floor(Math.random() * mathFacts.length);
+            const textEl = document.getElementById('fact-display-text');
+            textEl.style.opacity = '0';
+            setTimeout(() => {
+                textEl.innerText = `"${mathFacts[randomIndex]}"`;
+                textEl.style.opacity = '1';
+            }, 150);
+        }
+    </script>
+</body>

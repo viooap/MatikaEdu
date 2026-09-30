@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analisis Anuitas - RuangMatematika</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-full text-slate-800 font-sans antialiased bg-slate-100/80 flex flex-col min-h-screen">
+
+  <!-- TOP NAVBAR LIGHT MODE -->
+  <header class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo & Back Link -->
+      <div class="flex items-center gap-4">
+        <a href="/materi/" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors" title="Kembali ke Pilih Materi">
+          <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        </a>
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center text-white font-bold shadow-md shadow-violet-500/20">
+            <span class="text-xl">Σ</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-extrabold text-lg text-slate-900 tracking-tight leading-none">Ruang<span class="text-violet-600">Matematika</span></span>
+            <span class="text-[10px] text-slate-400 font-bold tracking-widest uppercase mt-0.5">Topik 5: Analisis Anuitas</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Hamburger Button garis tiga -->
+      <button id="openMenuBtn" aria-label="Buka Menu" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors focus:outline-none">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR / DRAWER MENU UTAMA -->
+  <div id="drawerOverlay" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  
+  <aside id="drawerMenu" class="fixed top-0 right-0 sm:right-auto sm:left-0 z-50 w-80 max-w-[85vw] h-full bg-white border-l sm:border-l-0 sm:border-r border-slate-200 transform translate-x-full sm:-translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl">
+    <div>
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white font-bold">
+            Σ
+          </div>
+          <span class="font-bold text-slate-900">Menu Navigasi</span>
+        </div>
+        <button id="closeMenuBtn" aria-label="Tutup Menu" class="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <nav class="p-4 space-y-2">
+        <a href="/" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all font-medium group">
+          <div class="p-2 rounded-lg bg-slate-100 text-slate-500 group-hover:bg-violet-100 group-hover:text-violet-600 transition-colors">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold">1. Dashboard</span>
+            <span class="text-[11px] text-slate-400 font-normal">Halaman Utama</span>
+          </div>
+        </a>
+
+        <a href="/materi/" class="flex items-center gap-3 px-4 py-3 rounded-xl text-violet-700 bg-violet-50 border border-violet-200 font-medium group">
+          <div class="p-2 rounded-lg bg-violet-600 text-white shadow-sm">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-sm font-bold text-violet-900">2. Pilih Materi</span>
+            <span class="text-[11px] text-violet-500 font-normal">Modul Finansial</span>
+          </div>
+        </a>
+
+        <a href="/credits/" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all font-medium group">
+          <div class="p-2 rounded-lg bg-slate-100 text-slate-500 group-hover:bg-amber-100 group-hover:text-amber-600 transition-colors">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold">3. Credits</span>
+            <span class="text-[11px] text-slate-400 font-normal">Tim & Pembuat</span>
+          </div>
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-slate-100 bg-slate-50">
+      <div class="flex items-center gap-3 text-xs text-slate-500">
+        <i data-lucide="info" class="w-4 h-4 text-violet-600 flex-shrink-0"></i>
+        <span>Halaman Materi Khusus</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- KONTEN UTAMA MATERI -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- HEADER MATERI -->
+    <div class="mb-8 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-100 text-violet-700 text-xs font-semibold mb-3">
+        <i data-lucide="pie-chart" class="w-3.5 h-3.5"></i>
+        Analisis Mendalam
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+        Analisis Materi Anuitas
+      </h1>
+      <p class="mt-2 text-slate-600 text-sm sm:text-base leading-relaxed">
+        Membedah struktur komponen pembayaran anuitas, hubungan antara porsi pokok dan bunga, serta dampaknya terhadap perencanaan keuangan.
+      </p>
+    </div>
+
+    <!-- OVERVIEW ANALISIS -->
+    <section class="mb-8 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-lg bg-violet-100 text-violet-600 flex items-center justify-center text-sm font-extrabold">🔎</span>
+        Pengenalan Sistem Anuitas
+      </h2>
+      <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
+        Anuitas merupakan sistem pembayaran atau penerimaan uang yang dilakukan secara berkala dengan jumlah yang tetap[cite: 6]. Konsep ini sangat penting karena banyak digunakan dalam kehidupan sehari-hari, terutama pada cicilan pinjaman, KPR, kendaraan, dan investasi[cite: 6].
+      </p>
+    </section>
+
+    <!-- KOMPOSISI ANUITAS (POKOK DAN BUNGA) -->
+    <section class="mb-8 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-lg bg-violet-100 text-violet-600 flex items-center justify-center text-sm font-extrabold">1</span>
+        Komposisi Pembayaran Anuitas
+      </h2>
+      <p class="text-slate-600 text-sm mb-6">
+        Dalam sistem anuitas, setiap angsuran berkala yang Anda bayarkan terdiri dari dua bagian utama[cite: 6]:
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        
+        <!-- Bagian Pokok -->
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2.5">
+            <div class="p-2 rounded-lg bg-emerald-100 text-emerald-600">
+              <i data-lucide="wallet" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 text-base">1. Pokok[cite: 6]</h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pt-1">
+            Bagian dari pembayaran yang secara langsung mengurangi jumlah total utang/pinjaman awal Anda[cite: 6].
+          </p>
+        </div>
+
+        <!-- Bagian Bunga -->
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2.5">
+            <div class="p-2 rounded-lg bg-amber-100 text-amber-600">
+              <i data-lucide="percent" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 text-base">2. Bunga[cite: 6]</h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pt-1">
+            Biaya jasa pinjaman yang dihitung berdasarkan sisa pinjaman yang belum terbayar[cite: 6].
+          </p>
+        </div>
+
+      </div>
+
+      <!-- PERUBAHAN PROPORSIONAL DARI WAKTU KE WAKTU -->
+      <div class="p-5 bg-violet-50/60 border border-violet-200 rounded-2xl">
+        <h3 class="font-bold text-violet-950 text-sm mb-3 flex items-center gap-2">
+          <i data-lucide="trending-up" class="w-4 h-4 text-violet-600"></i> Dinamika Perubahan Seiring Waktu
+        </h3>
+        <p class="text-xs sm:text-sm text-violet-900 leading-relaxed">
+          Pada awal periode, bagian <strong>bunga biasanya lebih besar</strong>, sedangkan bagian <strong>pokok lebih kecil</strong>[cite: 6]. Seiring berjalannya waktu, jumlah bunga akan terus menurun karena sisa pinjaman semakin berkurang, sehingga porsi bagian pokok menjadi semakin besar[cite: 6].
+        </p>
+      </div>
+    </section>
+
+    <!-- KESIMPULAN ANALISIS -->
+    <section class="mb-8 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-lg bg-violet-100 text-violet-600 flex items-center justify-center text-sm font-extrabold">📌</span>
+        Kesimpulan Analisis
+      </h2>
+
+      <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
+        Anuitas memberikan kemudahan karena jumlah pembayaran setiap periode dapat dibuat tetap sehingga lebih mudah direncanakan dalam anggaran keuangan[cite: 6]. Namun, perlu diingat bahwa semakin panjang jangka waktu pembayaran, semakin besar pula akumulasi total bunga yang dibayarkan[cite: 6].
+      </p>
+
+    </section>
+
+    <!-- INTI RINGKASAN CARD -->
+    <section class="bg-gradient-to-br from-violet-600 to-indigo-600 rounded-2xl p-6 sm:p-8 shadow-md text-white">
+      <h2 class="text-lg sm:text-xl font-bold mb-3 flex items-center gap-2">
+        <i data-lucide="bookmark" class="w-5 h-5"></i>
+        Intinya[cite: 6]
+      </h2>
+      <div class="p-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-center font-bold text-xs sm:text-sm text-white tracking-wide">
+        <blockquote class="italic text-violet-100">
+          "Anuitas = pembayaran berkala yang teratur, dengan setiap pembayaran terdiri dari bunga dan pokok."[cite: 6]
+        </blockquote>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+    <p>&copy; 2026 RuangMatematika. Hak Cipta Dilindungi.</p>
+  </footer>
+
+  <!-- SCRIPT LOGIKA DRAWER NAVIGATION -->
+  <script>
+    lucide.createIcons();
+
+    const openMenuBtn = document.getElementById('openMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const drawerMenu = document.getElementById('drawerMenu');
+
+    function openDrawer() {
+      drawerOverlay.classList.remove('opacity-0', 'pointer-events-none');
+      drawerMenu.classList.remove('translate-x-full', 'sm:-translate-x-full');
+    }
+
+    function closeDrawer() {
+      drawerOverlay.classList.add('opacity-0', 'pointer-events-none');
+      drawerMenu.classList.add('translate-x-full', 'sm:-translate-x-full');
+    }
+
+    openMenuBtn.addEventListener('click', openDrawer);
+    closeMenuBtn.addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+  </script>
+</body>
+</html>
